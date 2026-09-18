@@ -1,15 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  ArrowRight,
-  BookOpen,
-  ChevronRight,
-  LayoutDashboard,
-  Menu,
-  Sparkles,
-  User,
-  X,
-} from "lucide-react";
+import { ArrowRight, BookOpen, ChevronRight, LayoutDashboard,Menu, Sparkles, User, X,} from "lucide-react";
 
 export default function Navbar({ page, navigate }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -500,7 +491,6 @@ export default function Navbar({ page, navigate }) {
                     );
                   })}
 
-                  {/* MOBILE LOGIN / REGISTER */}
                   <div className="grid grid-cols-2 gap-2 border-t border-white/10 pt-3">
                     <motion.button
                       type="button"
