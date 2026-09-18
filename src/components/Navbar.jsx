@@ -16,6 +16,11 @@ export default function Navbar({ page, navigate }) {
       page: "courses",
       icon: BookOpen,
     },
+      {
+    label: "Instructors",
+    page: "instructors",
+    icon: User,
+  },
     {
       label: "Dashboard",
       page: "dashboard",
@@ -68,7 +73,6 @@ export default function Navbar({ page, navigate }) {
             shadow-[0_20px_50px_rgba(0,0,0,0.4)]
           "
         >
-          {/* Background glow */}
           <motion.div
             animate={{
               x: [0, 80, 0],
@@ -115,7 +119,6 @@ export default function Navbar({ page, navigate }) {
 
           <div className="relative flex min-h-[56px] items-center justify-between px-3 sm:min-h-[64px] sm:px-5 md:px-6">
 
-            {/* LOGO / LEARNIFY */}
             <motion.button
               type="button"
               onClick={() => go("profile")}
@@ -200,7 +203,6 @@ export default function Navbar({ page, navigate }) {
               </span>
             </motion.button>
 
-            {/* DESKTOP NAVIGATION */}
             <div className="hidden items-center gap-1 md:flex">
               {links.map((link) => {
                 const Icon = link.icon;
@@ -279,7 +281,6 @@ export default function Navbar({ page, navigate }) {
               })}
             </div>
 
-            {/* DESKTOP BUTTONS */}
             <div className="hidden items-center gap-2 md:flex">
               <motion.button
                 type="button"
@@ -339,7 +340,6 @@ export default function Navbar({ page, navigate }) {
               </motion.button>
             </div>
 
-            {/* MOBILE MENU BUTTON */}
             <motion.button
               type="button"
               whileTap={{
@@ -397,7 +397,6 @@ export default function Navbar({ page, navigate }) {
             </motion.button>
           </div>
 
-          {/* MOBILE NAVIGATION */}
           <AnimatePresence>
             {mobileOpen && (
               <motion.div
