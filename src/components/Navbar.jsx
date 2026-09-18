@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, BookOpen, ChevronRight, LayoutDashboard, Menu, Sparkles, X } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  ChevronRight,
+  LayoutDashboard,
+  Menu,
+  Sparkles,
+  User,
+  X,
+} from "lucide-react";
 
 export default function Navbar({ page, navigate }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -20,6 +29,11 @@ export default function Navbar({ page, navigate }) {
       label: "Dashboard",
       page: "dashboard",
       icon: LayoutDashboard,
+    },
+    {
+      label: "Profile",
+      page: "profile",
+      icon: User,
     },
   ];
 
@@ -63,6 +77,7 @@ export default function Navbar({ page, navigate }) {
             shadow-[0_20px_50px_rgba(0,0,0,0.4)]
           "
         >
+          {/* Background glow */}
           <motion.div
             animate={{
               x: [0, 80, 0],
@@ -75,12 +90,9 @@ export default function Navbar({ page, navigate }) {
               ease: "easeInOut",
             }}
             className="
-              pointer-events-none
-              absolute
-              -left-20
-              -top-20
-              h-40
-              w-40
+              pointer-events-none absolute
+              -left-20 -top-20
+              h-40 w-40
               rounded-full
               bg-indigo-600/30
               blur-3xl
@@ -99,12 +111,9 @@ export default function Navbar({ page, navigate }) {
               ease: "easeInOut",
             }}
             className="
-              pointer-events-none
-              absolute
-              -right-20
-              -bottom-20
-              h-44
-              w-44
+              pointer-events-none absolute
+              -right-20 -bottom-20
+              h-44 w-44
               rounded-full
               bg-purple-600/25
               blur-3xl
@@ -114,12 +123,15 @@ export default function Navbar({ page, navigate }) {
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
 
           <div className="relative flex min-h-[56px] items-center justify-between px-3 sm:min-h-[64px] sm:px-5 md:px-6">
+
+            {/* LOGO / LEARNIFY */}
             <motion.button
               type="button"
-              onClick={() => go("home")}
+              onClick={() => go("profile")}
               whileHover="hover"
               whileTap={{ scale: 0.95 }}
               className="group relative flex items-center gap-2 sm:gap-3"
+              title="Open Profile"
             >
               <motion.div
                 variants={{
@@ -129,15 +141,11 @@ export default function Navbar({ page, navigate }) {
                   },
                 }}
                 className="
-                  absolute
-                  left-0
-                  h-8
-                  w-8
+                  absolute left-0
+                  h-8 w-8 sm:h-10 sm:w-10
                   rounded-xl
                   bg-indigo-500/40
                   blur-xl
-                  sm:h-10
-                  sm:w-10
                 "
               />
 
@@ -158,23 +166,17 @@ export default function Navbar({ page, navigate }) {
                   transformStyle: "preserve-3d",
                 }}
                 className="
-                  relative
-                  flex
-                  h-8
-                  w-8
-                  items-center
-                  justify-center
+                  relative flex
+                  h-8 w-8 sm:h-9 sm:w-9
+                  items-center justify-center
                   rounded-xl
-                  border
-                  border-indigo-300/30
+                  border border-indigo-300/30
                   bg-gradient-to-br
                   from-indigo-500
                   via-purple-500
                   to-fuchsia-500
                   text-white
                   shadow-[0_4px_20px_rgba(99,102,241,0.45)]
-                  sm:h-9
-                  sm:w-9
                 "
               >
                 <BookOpen size={18} className="sm:hidden" />
@@ -190,16 +192,11 @@ export default function Navbar({ page, navigate }) {
                     repeat: Infinity,
                   }}
                   className="
-                    absolute
-                    -right-0.5
-                    -top-0.5
-                    h-2
-                    w-2
+                    absolute -right-0.5 -top-0.5
+                    h-2 w-2 sm:h-2.5 sm:w-2.5
                     rounded-full
                     bg-cyan-300
                     shadow-[0_0_10px_rgba(103,232,249,1)]
-                    sm:h-2.5
-                    sm:w-2.5
                   "
                 />
               </motion.div>
@@ -212,6 +209,7 @@ export default function Navbar({ page, navigate }) {
               </span>
             </motion.button>
 
+            {/* DESKTOP NAVIGATION */}
             <div className="hidden items-center gap-1 md:flex">
               {links.map((link) => {
                 const Icon = link.icon;
@@ -240,8 +238,7 @@ export default function Navbar({ page, navigate }) {
                           damping: 28,
                         }}
                         className="
-                          absolute
-                          inset-0
+                          absolute inset-0
                           rounded-xl
                           bg-gradient-to-r
                           from-indigo-500/30
@@ -254,18 +251,12 @@ export default function Navbar({ page, navigate }) {
 
                     <div
                       className={`
-                        relative
-                        flex
-                        min-h-10
-                        items-center
-                        gap-1.5
-                        rounded-xl
-                        px-3
-                        text-xs
-                        font-bold
+                        relative flex min-h-10
+                        items-center gap-1.5
+                        rounded-xl px-3
+                        text-xs font-bold
                         transition-colors
-                        lg:px-4
-                        lg:text-sm
+                        lg:px-4 lg:text-sm
                         ${
                           active
                             ? "text-white"
@@ -273,13 +264,7 @@ export default function Navbar({ page, navigate }) {
                         }
                       `}
                     >
-                      <motion.span
-                        whileHover={{
-                          rotate: [0, -10, 10, 0],
-                        }}
-                      >
-                        <Icon size={15} />
-                      </motion.span>
+                      <Icon size={15} />
 
                       {link.label}
 
@@ -287,10 +272,7 @@ export default function Navbar({ page, navigate }) {
                         <motion.span
                           layoutId="activeUnderline"
                           className="
-                            absolute
-                            bottom-1
-                            left-3
-                            right-3
+                            absolute bottom-1 left-3 right-3
                             h-[2px]
                             rounded-full
                             bg-gradient-to-r
@@ -306,8 +288,8 @@ export default function Navbar({ page, navigate }) {
               })}
             </div>
 
+            {/* DESKTOP BUTTONS */}
             <div className="hidden items-center gap-2 md:flex">
-              {/* Login Button */}
               <motion.button
                 type="button"
                 onClick={() => go("login")}
@@ -319,59 +301,22 @@ export default function Navbar({ page, navigate }) {
                 whileTap={{
                   scale: 0.94,
                 }}
-                style={{
-                  transformStyle: "preserve-3d",
-                }}
                 className="
-                  group
-                  relative
-                  flex
-                  items-center
-                  justify-center
-                  overflow-hidden
                   rounded-xl
                   bg-gradient-to-r
                   from-violet-600
                   via-indigo-600
                   to-purple-600
-                  px-3.5
-                  py-2
-                  text-xs
-                  font-black
+                  px-3.5 py-2
+                  text-xs font-black
                   text-white
                   shadow-[0_8px_25px_rgba(124,58,237,0.4)]
-                  lg:px-5
-                  lg:py-2.5
-                  lg:text-sm
+                  lg:px-5 lg:py-2.5 lg:text-sm
                 "
               >
-                {/* Shine effect */}
-                <motion.span
-                  animate={{
-                    x: ["-150%", "250%"],
-                  }}
-                  transition={{
-                    duration: 2.5,
-                    repeat: Infinity,
-                    repeatDelay: 1,
-                    ease: "easeInOut",
-                  }}
-                  className="
-                    absolute
-                    inset-y-0
-                    w-8
-                    rotate-12
-                    bg-white/30
-                    blur-md
-                  "
-                />
-
-                <span className="absolute inset-x-2 top-0 h-px bg-white/70" />
-
-                <span className="relative">Login</span>
+                Login
               </motion.button>
 
-              {/* Get Started Button */}
               <motion.button
                 type="button"
                 onClick={() => go("register")}
@@ -383,74 +328,27 @@ export default function Navbar({ page, navigate }) {
                 whileTap={{
                   scale: 0.94,
                 }}
-                style={{
-                  transformStyle: "preserve-3d",
-                }}
                 className="
-                  group
-                  relative
-                  flex
-                  items-center
-                  gap-1.5
-                  overflow-hidden
+                  flex items-center gap-1.5
                   rounded-xl
                   bg-gradient-to-r
                   from-indigo-500
                   via-purple-500
                   to-fuchsia-500
-                  px-3.5
-                  py-2
-                  text-xs
-                  font-black
+                  px-3.5 py-2
+                  text-xs font-black
                   text-white
                   shadow-[0_8px_25px_rgba(99,102,241,0.4)]
-                  lg:px-5
-                  lg:py-2.5
-                  lg:text-sm
+                  lg:px-5 lg:py-2.5 lg:text-sm
                 "
               >
-                {/* Shine effect */}
-                <motion.span
-                  animate={{
-                    x: ["-150%", "250%"],
-                  }}
-                  transition={{
-                    duration: 2.5,
-                    repeat: Infinity,
-                    repeatDelay: 1,
-                    ease: "easeInOut",
-                  }}
-                  className="
-                    absolute
-                    inset-y-0
-                    w-8
-                    rotate-12
-                    bg-white/30
-                    blur-md
-                  "
-                />
-
-                <span className="absolute inset-x-2 top-0 h-px bg-white/70" />
-
-                <Sparkles size={14} className="hidden sm:inline-block" />
-
-                <span className="relative">Get Started</span>
-
-                <motion.span
-                  animate={{
-                    x: [0, 3, 0],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                  }}
-                >
-                  <ArrowRight size={15} />
-                </motion.span>
+                <Sparkles size={14} />
+                Get Started
+                <ArrowRight size={15} />
               </motion.button>
             </div>
 
-            {/* MOBILE TOGGLE BUTTON */}
+            {/* MOBILE MENU BUTTON */}
             <motion.button
               type="button"
               whileTap={{
@@ -459,14 +357,10 @@ export default function Navbar({ page, navigate }) {
               }}
               onClick={() => setMobileOpen((prev) => !prev)}
               className="
-                flex
-                h-9
-                w-9
-                items-center
-                justify-center
+                flex h-9 w-9
+                items-center justify-center
                 rounded-xl
-                border
-                border-white/20
+                border border-white/20
                 bg-white/10
                 text-white
                 shadow-md
@@ -512,6 +406,7 @@ export default function Navbar({ page, navigate }) {
             </motion.button>
           </div>
 
+          {/* MOBILE NAVIGATION */}
           <AnimatePresence>
             {mobileOpen && (
               <motion.div
@@ -537,6 +432,7 @@ export default function Navbar({ page, navigate }) {
                 className="overflow-hidden border-t border-white/10 md:hidden"
               >
                 <div className="space-y-2 p-3 sm:p-4">
+
                   {links.map((link, index) => {
                     const Icon = link.icon;
                     const active = page === link.page;
@@ -564,17 +460,11 @@ export default function Navbar({ page, navigate }) {
                         }}
                         onClick={() => go(link.page)}
                         className={`
-                          flex
-                          w-full
-                          items-center
-                          justify-between
-                          rounded-xl
-                          border
-                          px-3.5
-                          py-2.5
-                          text-xs
-                          font-bold
-                          transition
+                          flex w-full
+                          items-center justify-between
+                          rounded-xl border
+                          px-3.5 py-2.5
+                          text-xs font-bold
                           sm:text-sm
                           ${
                             active
@@ -586,11 +476,8 @@ export default function Navbar({ page, navigate }) {
                         <span className="flex items-center gap-2.5">
                           <span
                             className={`
-                              flex
-                              h-7
-                              w-7
-                              items-center
-                              justify-center
+                              flex h-7 w-7
+                              items-center justify-center
                               rounded-lg
                               ${
                                 active
@@ -613,25 +500,20 @@ export default function Navbar({ page, navigate }) {
                     );
                   })}
 
+                  {/* MOBILE LOGIN / REGISTER */}
                   <div className="grid grid-cols-2 gap-2 border-t border-white/10 pt-3">
                     <motion.button
                       type="button"
                       whileTap={{ scale: 0.95 }}
                       onClick={() => go("login")}
                       className="
-                        flex
-                        items-center
-                        justify-center
                         rounded-xl
                         bg-gradient-to-r
                         from-violet-600
                         to-indigo-600
                         py-2.5
-                        text-xs
-                        font-black
+                        text-xs font-black
                         text-white
-                        shadow-md
-                        shadow-violet-600/20
                         sm:text-sm
                       "
                     >
@@ -640,25 +522,17 @@ export default function Navbar({ page, navigate }) {
 
                     <motion.button
                       type="button"
-                      whileTap={{
-                        scale: 0.95,
-                      }}
+                      whileTap={{ scale: 0.95 }}
                       onClick={() => go("register")}
                       className="
-                        flex
-                        items-center
-                        justify-center
-                        gap-1.5
+                        flex items-center justify-center gap-1.5
                         rounded-xl
                         bg-gradient-to-r
                         from-indigo-500
                         to-purple-500
                         py-2.5
-                        text-xs
-                        font-black
+                        text-xs font-black
                         text-white
-                        shadow-md
-                        shadow-indigo-500/20
                         sm:text-sm
                       "
                     >

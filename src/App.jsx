@@ -9,7 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
-
+import Profile from "./pages/Profile";
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState("home");
@@ -57,7 +57,7 @@ export default function App() {
           openCourse={openCourse}
         />
       )}
-
+{page === "profile" && <Profile />}
       {page === "courses" && (
         <Courses
           navigate={navigate}
